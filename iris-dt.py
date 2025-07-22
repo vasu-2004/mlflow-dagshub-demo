@@ -7,7 +7,10 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-mlflow.set_tracking_uri('http://127.0.0.1:5000')
+import dagshub
+dagshub.init(repo_owner='vasu-2004', repo_name='mlflow-dagshub-demo', mlflow=True)
+
+mlflow.set_tracking_uri('https://dagshub.com/vasu-2004/mlflow-dagshub-demo.mlflow')
 
 # Load the Iris dataset
 iris = load_iris()
@@ -21,7 +24,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 max_depth = 8
 n_estimators = 10
 
-mlflow.set_experiment("iris_dt")
+mlflow.set_experiment("iris-dt")
 # apply mlflow to train
 with mlflow.start_run(run_name="pk_exp_with_confusion_matrix_log_artifact"):
     mlflow.log_param("max_depth", max_depth)
